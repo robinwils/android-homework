@@ -12,13 +12,11 @@ class IHelloWorldService : public IInterface
 public:
   enum
   {
-    ALERT = IBinder::FIRST_CALL_TRANSACTION,
     HELLO
   };
 
   DECLARE_META_INTERFACE(HelloWorldService);
-  virtual String16 hello() = 0;
-  virtual void alert() = 0;
+  virtual String8 hello() = 0;
 };
 
 class BnHelloWorldService : public BnInterface<IHelloWorldService>
@@ -34,15 +32,13 @@ class BpHelloWorldService : public BpInterface<IHelloWorldService>
 {
 public:
   BpHelloWorldService(const sp<IBinder>& );
-  virtual String16 hello();
-  virtual void alert();
+  virtual String8 hello();
 };
 
 class HelloWorldService : public BnHelloWorldService
 {
 public:
-  virtual String16 hello();
-  virtual void alert();
+  virtual String8 hello();
 };
 }
 #endif /* !HELLOWORLDSERVICE_HH_ */

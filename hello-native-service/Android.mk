@@ -4,7 +4,8 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES:= main-service.cpp helloworldservice.cpp
 LOCAL_MODULE := helloworldservice
 LOCAL_SHARED_LIBRARIES := libutils libcutils libbinder
-LOCAL_CFLAGS := -Werror -Wall -std=c++0x
+LOCAL_STRIP_MODULE := false
+LOCAL_CFLAGS := -Werror -Wall -std=c++0x -O0 -ggdb3
 include $(BUILD_EXECUTABLE)
 
 include $(CLEAR_VARS)
