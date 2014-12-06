@@ -14,3 +14,10 @@ LOCAL_MODULE := helloworldclient
 LOCAL_SHARED_LIBRARIES := libutils libcutils libbinder
 LOCAL_CFLAGS := -Werror -Wall
 include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES:= helloworldservice.cpp
+LOCAL_MODULE := libhelloworldservice
+LOCAL_SHARED_LIBRARIES := libutils libcutils libbinder
+LOCAL_CFLAGS := -Werror -Wall
+include $(BUILD_SHARED_LIBRARY)
