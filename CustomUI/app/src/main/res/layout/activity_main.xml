@@ -52,16 +52,16 @@
             android:orientation="horizontal"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <view
+                class="android.com.customui.DateTile"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/date"
-                android:background="@android:color/holo_blue_dark"
+                android:background="#0B0164"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_gravity="bottom"
                 android:layout_margin="5dp" />
 
         </LinearLayout>

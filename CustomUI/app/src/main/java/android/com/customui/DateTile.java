@@ -4,18 +4,27 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by rwils on 12/16/14.
  */
 public class DateTile extends View {
-    private final Drawable mIcon;
     private final Paint mPaint;
-    private final int mSize;
+    private final SimpleDateFormat dateFormat, timeFormat, pmFormat;
+    private String pmString;
+    private String dateString;
+    private String timeString;
 
     /**
      * Constructor that is called when inflating a view from XML. This is called
@@ -42,14 +51,26 @@ public class DateTile extends View {
         );
 
         try {
-            mIcon = a.getDrawable(R.styleable.DateTile_tileIcon);
-            mSize = a.getInteger(R.styleable.DateTile_tileSize, 0);
+
         } finally {
             a.recycle();
         }
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(Color.WHITE);
+        this.dateFormat = new SimpleDateFormat("EEEE dd-MM-yyyy");
+        this.timeFormat = new SimpleDateFormat("hh:mm");
+        this.pmFormat = new SimpleDateFormat("aaa");
     }
+
+    void getTimeStrings() {
+        Calendar cal = Calendar.getInstance();
+        Date time = cal.getTime();
+        dateString = dateFormat.format(time);
+        timeString = timeFormat.format(time);
+        pmString = pmFormat.format(time);
+    }
+
 
     /**
      * Implement this to do your drawing.
@@ -59,11 +80,21 @@ public class DateTile extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Bitmap bm = Bitmap.createBitmap(mIcon.getIntrinsicWidth(), mIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas tmp = new Canvas(bm);
-        mIcon.setBounds(0, 0, tmp.getWidth(), tmp.getHeight());
-        mIcon.draw(tmp);
 
-        canvas.drawBitmap(Bitmap.createScaledBitmap(bm, 128, 128, false), 0, 0, mPaint);
+        getTimeStrings();
+        mPaint.setTextSize(40);
+        canvas.drawText(dateString, 20, 50, mPaint);
+        mPaint.setTextSize(120);
+        canvas.drawText(timeString, 20, 150, mPaint);
+        mPaint.setTextSize(30);
+        canvas.drawText(pmString, 320, 90, mPaint);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int w = resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec);
+        int h = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
+
+        setMeasuredDimension(w, h);
     }
 }
