@@ -112,7 +112,8 @@ public class FibonacciActivity extends ActionBarActivity {
     protected void onResume() {
         Log.d(TAG, "onResume");
         super.onResume();
-        if (!bindService(new Intent(IFibonacciService.class.getName()), mConnection, Context.BIND_AUTO_CREATE))
+        Log.d(TAG, IFibonacciService.class.getName());
+        if (!bindService(new Intent(this, IFibonacciService.class), mConnection, Context.BIND_AUTO_CREATE))
             Log.d(TAG, "Failed to bind service");
     }
 
