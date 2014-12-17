@@ -56,7 +56,6 @@
                 class="android.com.customui.DateTile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="160px"
                 android:layout_weight="1"
                 android:id="@+id/date"
                 android:background="#0B0164"
