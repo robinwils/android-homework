@@ -2,15 +2,13 @@ package android.com.customui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.Layout;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,6 +24,7 @@ public class DateTile extends View {
     private String dateString;
     private String timeString;
 
+
     /**
      * Constructor that is called when inflating a view from XML. This is called
      * when a view is being constructed from an XML file, supplying attributes
@@ -40,7 +39,6 @@ public class DateTile extends View {
      * @param context The Context the view is running in, through which it can
      *                access the current theme, resources, etc.
      * @param attrs   The attributes of the XML tag that is inflating the view.
-     * @see #View(android.content.Context, android.util.AttributeSet, int)
      */
     public DateTile(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -62,6 +60,7 @@ public class DateTile extends View {
         this.timeFormat = new SimpleDateFormat("hh:mm");
         this.pmFormat = new SimpleDateFormat("aaa");
     }
+
 
     void getTimeStrings() {
         Calendar cal = Calendar.getInstance();
